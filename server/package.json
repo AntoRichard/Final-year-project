@@ -15,7 +15,8 @@
 		"express": "^4.17.1",
 		"mongoose": "^5.8.7",
 		"react-id-generator": "^3.0.0",
-		"textract": "^2.5.0"
+		"textract": "^2.5.0",
+		"underscore": "^1.9.2"
 	},
 	"devDependencies": {
 		"morgan": "^1.9.1",

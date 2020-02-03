@@ -14,5 +14,7 @@ app.use(require('./Routes/Subject'));
 app.use(require('./Routes/Questions'));
 app.use(require('./Routes/AddStudent'));
 app.use(require('./Routes/GetStudent'));
+app.use(require('./Routes/Validate'));
+
 
 app.listen(PORT, ()=> console.log(`Server running in PORT : ${PORT}`));

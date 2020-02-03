@@ -16,6 +16,22 @@ exports.getSubject = async (req, res, next) => {
     }
 }
 
+exports.getSingleSubject = async (req, res, next) => {
+    console.log('in')
+    const { code } = req.params;
+    try {
+        const subject = await subjectModel.findOne({code});
+        res.status(201).json({
+            msg: 'success',
+            subject
+        })
+    } catch (err) {
+        res.status(500).json({
+            msg: 'Internal server problem'
+        })
+    }
+}
+
 exports.postSubject = async (req, res, next) => {
     console.log(req.body);
     try {
