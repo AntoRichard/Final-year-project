@@ -13,8 +13,12 @@
 	"dependencies": {
 		"config": "^3.2.5",
 		"express": "^4.17.1",
+		"html-to-text": "^5.1.1",
 		"mongoose": "^5.8.7",
+		"natural": "^0.6.3",
+		"node-fetch": "^2.6.0",
 		"react-id-generator": "^3.0.0",
+		"string-similarity": "^4.0.1",
 		"textract": "^2.5.0",
 		"underscore": "^1.9.2"
 	},
