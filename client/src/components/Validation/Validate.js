@@ -4,32 +4,35 @@ import Evaluate from './Display/Evaluate';
 import axios from 'axios';
 
 class Validate extends Component {
+  state = {
+    student: null,
+    loading: true,
+    subject: null,
+    questions: null
+  };
 
-    state = {
-        student: null,
-        loading: true,
-        subject: null
-    }
+  UNSAFE_componentWillMount = async () => {
+    const { id, code } = this.props.match.params;
+    const response = await axios.get(`/student/${id}`);
+    const { student } = response.data;
+    const response2 = await axios.get(`/subject/${code}`);
+    const { subject } = response2.data;
+    const response3 = await axios.get(`/questions/ ${subject.name}`);
+    const ques = response3.data;
+    console.log(ques);
+    this.setState({ student, loading: false, subject, questions: ques.ques });
+  };
+  render() {
+    const { student, loading, subject, questions } = this.state;
 
-    UNSAFE_componentWillMount = async () => {
-        const { id, code } = this.props.match.params;
-        const response = await axios.get(`/student/${id}`);
-        const { student } = response.data;
-        const response2 = await axios.get(`/subject/${code}`)
-        const{ subject } = response2.data;
-        this.setState({student, loading: false, subject});
-    }
-    render() {
-        const { student, loading, subject } = this.state;
-
-        if(loading) return <p>Loading . . . </p>
-        return (
-            <div className="dashboard-container">
-                <Display student={student}/>
-                <Evaluate subject={subject}/>
-            </div>
-        )
-    }
+    if (loading) return <p>Loading . . . </p>;
+    return (
+      <div className="dashboard-container">
+        <Display student={student} />
+        <Evaluate subject={subject} questions={questions} />
+      </div>
+    );
+  }
 }
 
 export default Validate;
