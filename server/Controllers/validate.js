@@ -16,7 +16,7 @@ const fetchGet = async url => {
 };
 
 exports.postValidate = async (req, res, next) => {
-  const { fileName } = req.body;
+  const { fileName, SNO, ques } = req.body;
   const filePath = path.join(__dirname, '..', 'images', fileName);
 
   textract.fromFileWithPath(filePath, async function(error, text) {
@@ -25,16 +25,22 @@ exports.postValidate = async (req, res, next) => {
         msg: 'Internal server problem'
       });
     }
-    const result = TextComparison(text, [
-      'programming',
-      'paradigm',
-      'modify',
-      'associated'
-    ]);
-
-    const data = `https://en.wikipedia.org/api/rest_v1/page/summary/object oriented programming`;
-    const response = await fetchGet(data);
-    const contentEvaluation = similartity.compareTwoStrings(response, text);
+    const result = TextComparison(text, ques.key);
+    let contentEvaluation;
+    if (ques.question.split('is').length > 1) {
+      const data = `https://en.wikipedia.org/api/rest_v1/page/summary/${
+        ques.question.split('is')[1]
+      }`;
+      const response = await fetchGet(data);
+      contentEvaluation = similartity.compareTwoStrings(response, text);
+    }
+    if (ques.question.split('about').length > 1) {
+      const data = `https://en.wikipedia.org/api/rest_v1/page/summary/${
+        ques.question.split('about')[1]
+      }`;
+      const response = await fetchGet(data);
+      contentEvaluation = similartity.compareTwoStrings(response, text);
+    }
 
     const keyMarks = result.length * 0.25;
     const contentMark = contentEvaluation;
