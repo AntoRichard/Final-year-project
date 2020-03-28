@@ -57,3 +57,18 @@ exports.getQuestions = async (req, res, next) => {
     });
   }
 };
+
+
+exports.getAllQuestions = async (req, res, next) => {
+  try {
+    const questions = await questionModel.find();
+    res.status(201).json({
+      msg: 'success',
+      questions
+    })
+  } catch (err) {
+    res.status(500).json({
+      msg: 'Internal server problem'
+    })
+  }
+}

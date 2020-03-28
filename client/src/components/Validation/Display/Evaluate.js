@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from '../Utils/Card';
 
-const Evaluate = ({ subject, questions }) => {
-  console.log(subject);
-
+const Evaluate = ({ subject, questions, id }) => {
   return (
     <div style={{ margin: `8%` }}>
       <div style={{ textAlign: 'center' }}>
@@ -19,10 +17,12 @@ const Evaluate = ({ subject, questions }) => {
         <Card
           title="2 MARKS"
           questions={questions.filter(ques => ques.marks === 2)}
+          id={id}
         />
         <Card
           title="15 MARKS"
           questions={questions.filter(ques => ques.marks === 15)}
+          id={id}
         />
       </div>
     </div>

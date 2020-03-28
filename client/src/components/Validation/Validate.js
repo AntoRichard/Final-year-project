@@ -19,17 +19,16 @@ class Validate extends Component {
     const { subject } = response2.data;
     const response3 = await axios.get(`/questions/ ${subject.name}`);
     const ques = response3.data;
-    console.log(ques);
     this.setState({ student, loading: false, subject, questions: ques.ques });
   };
   render() {
     const { student, loading, subject, questions } = this.state;
-
+    console.log(student);
     if (loading) return <p>Loading . . . </p>;
     return (
       <div className="dashboard-container">
         <Display student={student} />
-        <Evaluate subject={subject} questions={questions} />
+        <Evaluate subject={subject} questions={questions} id={student.id} />
       </div>
     );
   }

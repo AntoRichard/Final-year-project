@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Table from './Table';
 
-const Card = ({ title, questions }) => {
+const Card = ({ title, questions, id }) => {
   const [hide, setHide] = useState(false);
   return (
     <div
@@ -21,18 +21,18 @@ const Card = ({ title, questions }) => {
             onClick={() => setHide(!hide)}
           ></i>
         ) : (
-          <i
-            class="fa fa-caret-up"
-            style={{ float: 'right', fontSize: '24px', display: 'inline' }}
-            onClick={() => setHide(!hide)}
-          ></i>
-        )}
+            <i
+              class="fa fa-caret-up"
+              style={{ float: 'right', fontSize: '24px', display: 'inline' }}
+              onClick={() => setHide(!hide)}
+            ></i>
+          )}
       </div>
       <div>
         {hide ? null : (
           <React.Fragment>
-            {questions.map(ques => (
-              <Table ques={ques} />
+            {questions.map((ques, index) => (
+              <Table ques={ques} id={id} index={index} />
             ))}
           </React.Fragment>
         )}

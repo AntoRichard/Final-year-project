@@ -10,6 +10,7 @@ import AddQuestions from './components/AddQuestions/AddQuestions';
 import AddStudent from './components/AddStudent/AddStudent';
 import Validate from './components/Validation/Validate';
 import GlobalContext from './context/GlobalContext';
+import View from './components/ViewAllQuestions/View';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
               <Route path="/add-subject" component={AddSubject} />
               <Route path="/eval" component={Evaluate} />
               <Route path="/add-student" component={AddStudent} />
+              <Route path="/view-que" component={View} />
               <Route exact path="/" component={Home} />
               <Route
                 path="/validate/:id/:code"

@@ -5,19 +5,18 @@ import { Loader } from './Loader';
 
 let SNO = 0;
 
-const Table = ({ ques }) => {
+const Table = ({ ques, id, index }) => {
   const { state, dispatch } = useContext(GlobalContext);
   const [progress, setProgress] = useState(false);
 
   const onImageUploadHandler = async event => {
-    console.log(event.target.files[0].name);
     setProgress(true);
     const response = await axios.post('/validate', {
       fileName: event.target.files[0].name,
       SNO,
-      ques
+      ques,
+      id
     });
-    console.log(response.data.totalMarks);
     dispatch({ type: 'SET_MARK', payload: response.data.totalMarks });
     setProgress(false);
   };
@@ -33,9 +32,9 @@ const Table = ({ ques }) => {
         display: 'flex'
       }}
     >
-      <h2 style={{ padding: '5px 50px', width: '60%' }}>{`${(SNO += 1)}) ${
+      <h2 style={{ padding: '5px 50px', width: '60%' }}>{`${index + 1}) ${
         ques.question
-      }`}</h2>
+        }`}</h2>
       {progress ? (
         <React.Fragment>
           <Loader />
